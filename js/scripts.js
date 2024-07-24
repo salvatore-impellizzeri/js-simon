@@ -1,6 +1,6 @@
 function randomNumber(){
     for(let i = 0; i < 5; i++){
-
+        
         let number = Math.floor(Math.random() * 100);
         if(arrayRandomNum.includes(number)){
             i--;
@@ -13,11 +13,10 @@ function randomNumber(){
        randomNum.innerHTML = arrayRandomNum.join(" - ");
 }
 
+const arrayRandomNum = [];
 const button = document.getElementById("play-button");
 const stringReady = document.getElementById("string-ready");
-const readyCount = document.getElementById("raedy-countdown");
 let randomNum = document.getElementById("random-numbers");
-const arrayRandomNum = [];
 
 button.addEventListener("click", function(){
 
@@ -25,31 +24,22 @@ button.addEventListener("click", function(){
     stringReady.classList.replace("d-block", "d-none");
 
     let counter = 3;
+    randomNum.innerHTML = counter;
 
-    function countdown(){
-
+    const clock = setInterval(function () {
+        counter--;
         console.log(counter);
-        readyCount.innerHTML = `${counter}`;
-        if(counter == 0){
+        randomNum.innerHTML = counter;
+
+        if(counter === 0){
             clearInterval(clock);
             randomNumber();
         }
-        else{
-            counter--;
-        }
-    }
-
-    const clock = setInterval(countdown, 1000);
+    }, 1000);
 
     setTimeout(function(){
         randomNum.innerHTML = "";
     }, 8000)
-
-    setTimeout(function(){
-        for(let j = 0; j < 5; j++){
-            let userNumber = parseInt(prompt("Inserisci il numero:"))
-        }
-    }, 8100);
-
 })
+
 
