@@ -1,22 +1,56 @@
+// FUNZIONI
+
+//          RANDOM NUMBER
+
 function randomNumber(){
     for(let i = 0; i < 5; i++){
         
         let number = Math.floor(Math.random() * 100);
-        if(arrayRandomNum.includes(number)){
+        if(arrayString.includes(number)){
             i--;
         }
         else{
-            arrayRandomNum.push(number);
+            arrayString.push(number);
         }
        }
-       console.log(arrayRandomNum);
-       randomNum.innerHTML = arrayRandomNum.join(" - ");
+       console.log(arrayString);
+       string.innerHTML = arrayString.join(" - ");
 }
 
-const arrayRandomNum = [];
+//          PROMPT
+
+function userPrompt(){
+
+    const userNumArray = [];
+    const rightArray = [];
+    let right = 0;
+
+    for(let k = 0; k < 5; k++){
+        let userNum = parseInt(prompt("Inserisci un numero (rispetta l'ordine):"));
+
+        userNumArray.push(userNum);
+
+        if(arrayString[k] == userNumArray[k]){
+            right++;
+            rightArray.push(userNum);
+        }
+    }
+
+    if(rightArray == 0){
+        string.innerHTML = `Hai ricordato ${right} numeri su 5`;
+    }
+
+    else{
+        string.innerHTML = `Hai ricordato ${right} numeri su 5 ed i numeri inseriti corretti sono: ${rightArray.join(" - ")}`;
+    }
+}
+
+// FINE FUNZIONI
+
+const arrayString = [];
 const button = document.getElementById("play-button");
 const stringReady = document.getElementById("string-ready");
-let randomNum = document.getElementById("random-numbers");
+let string = document.getElementById("string");
 
 button.addEventListener("click", function(){
 
@@ -24,12 +58,13 @@ button.addEventListener("click", function(){
     stringReady.classList.replace("d-block", "d-none");
 
     let counter = 3;
-    randomNum.innerHTML = counter;
+    string.innerHTML = counter;
+    console.log(counter);
 
-    const clock = setInterval(function () {
+    const clock = setInterval(function() {
         counter--;
         console.log(counter);
-        randomNum.innerHTML = counter;
+        string.innerHTML = counter;
 
         if(counter === 0){
             clearInterval(clock);
@@ -38,8 +73,12 @@ button.addEventListener("click", function(){
     }, 1000);
 
     setTimeout(function(){
-        randomNum.innerHTML = "";
-    }, 8000)
+        string.innerHTML = "";
+    }, 1000 * 30); 
+
+    setTimeout(function(){
+        userPrompt();
+    }, 1002 * 30);
 })
 
 
